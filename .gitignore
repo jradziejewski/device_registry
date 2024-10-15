@@ -3,10 +3,9 @@
 
 # Ignore log files
 /log/*
-!/log/.keep  # Keep the log/.keep file to maintain the directory
 
 # Ignore temporary files
-/tmp/
+/tmp/*
 
 # Ignore SQLite database files
 /storage/*.sqlite3*
