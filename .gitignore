@@ -1,0 +1,67 @@
+# Ignore bundler config
+/.bundle/
+
+# Ignore log files
+/log/*
+
+# Ignore temporary files
+/tmp/*
+
+# Ignore SQLite database files
+/storage/*.sqlite3*
+/db/*.sqlite3*
+/db/*.sqlite3-journal
+
+# Ignore generated files from SQLite
+/storage/development.sqlite3-shm
+/storage/development.sqlite3-wal
+
+# Ignore environment variables
+/.env
+/.env.local
+/.env.*.local
+
+# Ignore backup files
+*~
+*.swp
+
+# Ignore uploaded files
+/public/uploads
+
+# Ignore test files
+/spec/tmp
+/spec/support/uploads
+/spec/tmp/*
+/test/tmp
+/test/support/uploads
+/test/tmp/*
+
+# Ignore coverage reports
+/coverage/
+
+# Ignore vendor directory
+/vendor/bundle
+/vendor/cache
+
+# Ignore node_modules if you're using npm
+/node_modules/
+
+# Ignore package lock files if using Yarn
+/yarn.lock
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE or editor specific files
+.idea/
+.vscode/
+*.iml
+
+# Ignore Rails credentials
+/config/credentials.yml.enc
+/config/master.key
+
+# Ignore other development files
+/.byebug_history
+
