@@ -12,6 +12,8 @@ class AssignDeviceToUser
 
     device = Device.find_or_initialize_by(serial_number: @serial_number)
 
+    raise AssigningError::AlreadyUsedOnOtherUser if device.user && device.user != @requesting_user
+
     device.user = @requesting_user
 
     if device.save
