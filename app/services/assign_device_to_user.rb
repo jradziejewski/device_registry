@@ -8,7 +8,16 @@ class AssignDeviceToUser
   end
 
   def call
-    device = Device.find_by(serial_number: @serial_number)
     raise RegistrationError::Unauthorized if @requesting_user.id != @new_device_owner_id
+
+    device = Device.find_or_initialize_by(serial_number: @serial_number)
+
+    device.user = @requesting_user
+
+    if device.save
+      :success
+    else
+      :error
+    end
   end
 end
