@@ -12,11 +12,13 @@ class AssignDeviceToUser
 
     device = Device.find_or_initialize_by(serial_number: @serial_number)
 
+    raise AssigningError::AlreadyUsedOnUser if device.device_histories.where(user_id: @requesting_user.id).exists?
     raise AssigningError::AlreadyUsedOnOtherUser if device.user && device.user != @requesting_user
 
     device.user = @requesting_user
 
     if device.save
+      device.device_histories.create(user: @requesting_user)
       :success
     else
       :error

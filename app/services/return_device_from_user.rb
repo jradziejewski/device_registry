@@ -17,6 +17,7 @@ class ReturnDeviceFromUser
     device.update!(user: nil)
 
     if device.save
+      device.device_histories.create(user: @requesting_user)
       :success
     else
       :error
