@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Device, type: :model do
-  let (:user) { create(:user) }
+  let(:user) { create(:user) }
 
   it 'is valid with valid attributes' do
     device = Device.new(serial_number: '123456', user: user)

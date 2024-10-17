@@ -6,6 +6,7 @@ class AssigningError < StandardError
       super('Device is already assigned to another user')
     end
   end
+
   class AlreadyUsedOnUser < self
     def initialize
       super('Device was previously assigned to the user')
