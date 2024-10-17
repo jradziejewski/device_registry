@@ -3,6 +3,8 @@
 class Device < ApplicationRecord
   belongs_to :user, optional: true
   has_many :device_histories
+
+  validates :serial_number, presence: true, uniqueness: true
 end
 
 class DeviceHistory < ApplicationRecord
