@@ -9,22 +9,22 @@ RSpec.describe DevicesController, type: :controller do
   describe 'POST #assign' do
     subject(:assign) do
       post :assign,
-           params: { new_owner_id: new_owner_id, device: { serial_number: '123456' } },
+           params: { new_owner_id: new_owner_id, serial_number: '123456' },
            session: { token: user.api_keys.first.token }
     end
     context 'when the user is authenticated' do
       context 'when user assigns a device to another user' do
-        let(:new_owner_id) { create(:user).id }
+        let(:new_owner_id) { create(:user, email: 'other_user@example.com').id }
 
         it 'returns an unauthorized response' do
-          expect(response.code).to eq(422)
-          expect(JSON.parse(response.body)).to eq({ 'error' => 'Unauthorized' })
+          assign
+          expect(response.code.to_i).to eq(401)
+          expect(JSON.parse(response.body)).to eq({ 'error' => RegistrationError::Unauthorized.new.message })
         end
       end
 
       context 'when user assigns a device to self' do
         let(:new_owner_id) { user.id }
-
         it 'returns a success response' do
           assign
           expect(response).to be_successful
