@@ -19,7 +19,7 @@ RSpec.describe ReturnDeviceFromUser do
   let!(:device) { Device.create(serial_number: example_serial, user: user) }
 
   context 'when user tries to return a device they do not own' do
-    let(:other_user) { create(:user) }
+    let(:other_user) { create(:user, email: 'other_user@example.com' ) }
     let(:assigned_user_id) { other_user.id }
 
     it 'raises an unauthorized error' do
@@ -31,6 +31,14 @@ RSpec.describe ReturnDeviceFromUser do
     it 'successfully returns the device' do
       expect { return_device }.to change { device.reload.user }.from(user).to(nil)
       expect(return_device).to eq(:success)
+    end
+
+    it 'creates a new entry in history' do
+      expect { return_device }.to change { DeviceHistory.count }.by(1)
+
+      history = DeviceHistory.last
+      expect(history.device.serial_number).to eq(serial_number)
+      expect(history.user).to eq(user)
     end
   end
 

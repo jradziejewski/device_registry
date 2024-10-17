@@ -31,6 +31,14 @@ RSpec.describe AssignDeviceToUser do
       expect(user.devices.pluck(:serial_number)).to include(serial_number)
     end
 
+    it 'creates a new entry in history' do
+      expect { assign_device }.to change { DeviceHistory.count }.by(1)
+
+      history = DeviceHistory.last
+      expect(history.device.serial_number).to eq(serial_number)
+      expect(history.user).to eq(user)
+    end
+
     context 'when a user tries to register a device that was already assigned to and returned by the same user' do
       before do
         AssignDeviceToUser.new(
