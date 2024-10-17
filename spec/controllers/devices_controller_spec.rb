@@ -9,7 +9,7 @@ RSpec.describe DevicesController, type: :controller do
   describe 'POST #assign' do
     subject(:assign) do
       post :assign,
-           params: { new_owner_id: new_owner_id, serial_number: '123456' },
+           params: { serial_number: '123456', target_user_id: new_owner_id },
            session: { token: user.api_keys.first.token }
     end
     context 'when the user is authenticated' do

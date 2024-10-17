@@ -6,7 +6,7 @@ class DevicesController < ApplicationController
     AssignDeviceToUser.new(
       requesting_user: @current_user,
       serial_number: device_params[:serial_number],
-      new_device_owner_id: device_params[:new_owner_id].to_i
+      new_device_owner_id: device_params[:target_user_id].to_i
     ).call
     head :ok
   rescue RegistrationError::Unauthorized => e
@@ -20,6 +20,6 @@ class DevicesController < ApplicationController
   private
 
   def device_params
-    params.permit(:new_owner_id, :serial_number)
+    params.permit(:serial_number, :target_user_id)
   end
 end
