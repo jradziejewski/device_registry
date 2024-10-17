@@ -6,12 +6,14 @@ class ReturnError < StandardError
       super('You are not authorized to perform this action')
     end
   end
-  class DeviceNotFound < self 
+
+  class DeviceNotFound < self
     def initialize
       super('Device not found')
     end
   end
-  class DeviceAlreadyReturned < self 
+
+  class DeviceAlreadyReturned < self
     def initialize
       super('Device is already returned')
     end

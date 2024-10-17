@@ -25,19 +25,19 @@ RSpec.describe User, type: :model do
   end
 
   it 'validates presence of password' do
-    user = User.new(email:unique_email, password: nil, password_confirmation: password) 
+    user = User.new(email: unique_email, password: nil, password_confirmation: password)
     expect(user.valid?).to be_falsey
     expect(user.errors[:password]).to include("can't be blank")
   end
 
   it 'validates presence of password_confirmation' do
-    user = User.new(email:unique_email, password: password, password_confirmation: nil)
+    user = User.new(email: unique_email, password: password, password_confirmation: nil)
     expect(user.valid?).to be_falsey
     expect(user.errors[:password_confirmation]).to include("can't be blank")
   end
 
   it 'validates that password matches password_confirmation' do
-    user = User.new(email:unique_email, password: password, password_confirmation: 'notpassword')
+    user = User.new(email: unique_email, password: password, password_confirmation: 'notpassword')
     expect(user.valid?).to be_falsey
     expect(user.errors[:password]).to include('must match password confirmation')
   end
