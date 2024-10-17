@@ -19,7 +19,7 @@ RSpec.describe ReturnDeviceFromUser do
   let!(:device) { Device.create(serial_number: example_serial, user: user) }
 
   context 'when user tries to return a device they do not own' do
-    let(:other_user) { create(:user, email: 'other_user@example.com' ) }
+    let(:other_user) { create(:user, email: 'other_user@example.com') }
     let(:assigned_user_id) { other_user.id }
 
     it 'raises an unauthorized error' do

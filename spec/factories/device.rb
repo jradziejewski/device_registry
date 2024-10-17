@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :device do
-    sequence(:serial_number) { |n| n.to_s }
+    sequence(:serial_number, &:to_s)
     association :user
   end
 end
